@@ -1,0 +1,83 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+@keyframes text-fade-in {
+    from {
+        opacity: 0; transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1; transform: translateY(0);
+    }
+}
+
+@keyframes text-fade-out {
+    from {
+        opacity: 1; transform: translateY(0);
+    }
+
+    to {
+        opacity: 0; transform: translateY(-20px);
+    }
+}
+
+.circle-spin {
+    width: 100%;
+    height: 350vh;
+
+    border: 1px solid white;
+    
+    view-timeline-name: --circle-rotate-timeline;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .3);
+    }
+}
+        
+.circle-spin__inner {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    
+    gap: 5em;
+    
+    position: sticky;
+    top: 0;
+
+    overflow: hidden;
+
+    h2 {
+        animation-name: text-fade-in, text-fade-out;
+        animation-timeline: --circle-rotate-timeline, --circle-rotate-timeline;
+        animation-timing-function: ease-in, ease-out;
+
+        animation-fill-mode: both, forwards;
+        animation-range: entry 25% entry 70%, exit 0% exit 20%;
+    }
+}
+
+.circle-spin__spinner {
+    width: 200px;
+    height: 200px;
+    
+    border-radius: 50%;
+    line-height: 200px;
+    text-align: center;
+
+    background-color: black;
+
+    animation-name: rotate;
+    animation-timeline: --circle-rotate-timeline;
+    animation-range: contain 0% contain 100%;
+}

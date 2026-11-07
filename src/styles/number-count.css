@@ -1,0 +1,40 @@
+@property --num {
+    syntax: "<integer>";
+    inherits: false;
+    initial-value: 0;
+}
+
+@keyframes count-up {
+    from {
+        --num: 0;
+    }
+
+    to {
+        --num: var(--to);
+    }
+}
+
+.number-container {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-container__data {
+    --to: attr(data-value type(<integer>), 0);
+    
+    width: 100%;
+    height: 100%;
+    
+    counter-reset: n var(--num);
+
+    font-size: 5em;
+ 
+    animation: count-up cubic-bezier(0.1, 0.6, 0.2, 1) 1.5s forwards;
+
+    &::after {
+        content: counter(n) / "";
+    }
+}

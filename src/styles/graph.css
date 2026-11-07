@@ -1,0 +1,68 @@
+@property --graph-total {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0;
+}
+
+@property --graph-number {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0;
+}
+
+@property --graph-string {
+    syntax: '<string>';
+    inherits: false;
+    initial-value: 0;
+}
+
+.graph-block {
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.graph {
+    --graph-total: attr(data-total type<integer>, 0);
+    min-width: 600px;
+
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.graph__row {
+    --graph-number: attr(data-number type<integer>, 0);
+    --graph-string: attr(data-number);
+    
+    min-height: 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 14fr 1fr;
+    gap: .5rem;
+    
+    grid-template-areas:
+        "year bar number";
+}
+
+
+.graph__year {
+    grid-area: year;
+}
+
+.graph__bar {
+    grid-area: bar;
+    width: calc((var(--graph-number) / var(--graph-total)) * 100%);
+    background-color: #363636;
+}
+
+.graph__number {
+    grid-area: number;
+    justify-self: end;
+
+    &::after {
+        content: var(--graph-string) / "";
+    }
+}
